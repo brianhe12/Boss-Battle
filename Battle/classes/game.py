@@ -1,4 +1,5 @@
 import random
+import time
 
 class bcolors:
     HEADER = '\033[95m'
@@ -27,13 +28,61 @@ class Person:
     def generate_damage(self):
         return random.randrange(self.atkl, self.atkh)
 
+# Will generate and return random spell damage between mgl and mgh
     def generate_spell_damage(self, i):
         mgl = self.magic[i]["dmg"] - 5
         mgh = self.magic[i]["dmg"] + 5
         return random.randrange(mgl,mgh)
 
+# Allows Person to take damage, HP not allowed to be under 0
     def take_damage(self,dmg):
         self.hp -= dmg
-        if self.hp < 0:
+        if self.hp <= 0:
             self.hp = 0
+            print(bcolors.FAIL + bcolors.BOLD + "Game Over. You have Died" + bcolors.ENDC)
         return self.hp
+
+# Get Functions
+    def get_hp(self):
+        return self.hp
+
+    def get_max_hp(self):
+        return self.maxhp
+
+    def get_mp(self):
+        return self.mp
+
+    def get_max_mp(self):
+        return self.maxmp
+
+    # Reduce MP when we use spells
+    def reduce_mp(self, cost):
+        self.mp =- cost
+
+    def get_spell_name(self, i):
+        return self.magic[i]["name"]
+
+    def get_spell_mp_cost(self, i):
+        return self.magic[i]["cost"]
+
+    def choose_action(self):
+        i = 1
+        print("Choose your Action!")
+        time.sleep(0.5)
+        for item in self.actions:
+            print(str(i) + ":", item)
+            i += 1
+
+    def choose_spell(self):
+        i = 1
+        print("Magic")
+        for spell in self.magic:
+            print(str(i) + ":", spell["name"], "(cost:", str(spell["cost"]) + ")")
+            i += 1
+
+
+
+
+
+
+
