@@ -10,6 +10,7 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+#Initalize Everything
 class Person:
     def __init__(self, hp, mp, atk, df, magic):
         self.maxhp = hp
@@ -22,6 +23,17 @@ class Person:
         self.magic = magic
         self.actions = ["Attack", "Magic"]
 
-# Will generate random damage between atkl and atkh
+# Will generate and return random damage between atkl and atkh
     def generate_damage(self):
         return random.randrange(self.atkl, self.atkh)
+
+    def generate_spell_damage(self, i):
+        mgl = self.magic[i]["dmg"] - 5
+        mgh = self.magic[i]["dmg"] + 5
+        return random.randrange(mgl,mgh)
+
+    def take_damage(self,dmg):
+        self.hp -= dmg
+        if self.hp < 0:
+            self.hp = 0
+        return self.hp
