@@ -11,6 +11,7 @@ magic = [{"name": "Blaze", "cost": 10, "dmg": 100},
 player = Person(430, 70, 60, 34, magic)
 enemy = Person(1325, 70, 45, 25, magic)
 
+
 #Status's
 status = "None"
 frozen_status_count = 0
@@ -31,6 +32,7 @@ while running:
     choice = int(input())
     index = choice - 1
     print("You choose", player.actions[index] + "!")
+    print("=======================")
 
 # If Player choose 1 to Attack
     if choice == 1:
@@ -55,17 +57,17 @@ while running:
         # If we have enough MP, see which status each spell could inflict
         if magic_choice == 0: #fire
             burn_status_count = burn_status_count + 3
-            print("Blaze did 100 Damage!")
+            print("Blaze did", magic_dmg, "Damage!")
             status = "BURNED"
 
         elif magic_choice == 1: #paralyzed
             para_status_count = para_status_count + 2
-            print("Lightning did 100 Damage!")
+            print("Lightning did", magic_dmg, "Damage!")
             status = "PARA"
 
         elif magic_choice == 2: #frozen
             frozen_status_count = frozen_status_count + 2
-            print("Frostbite did 100 Damage!")
+            print("Frostbite did", magic_dmg, "Damage!")
             status = "FROZEN"
 
         player.reduce_mp(cost)
@@ -75,6 +77,7 @@ while running:
     elif choice == 3:
         player.heal()
 
+    #Statuses for Enemy
     if (status == "PARA") and (para_status_count > 0):
         para_skip = True
         #print("Enemy Paralyzed")
@@ -98,12 +101,50 @@ while running:
         enemy.take_damage(10)
         frozen_status_count = frozen_status_count - 1
 
+    #Immobilization check
     if (para_skip == False) or (frozen_skip == False): # both false means enemy is normal
-        # Just get Enemy to Attack for Now
-        enemy_choice = 1
-        enemy_dmg = enemy.generate_damage()
-        player.take_damage(enemy_dmg)
-        print("Enemy attacks for", enemy_dmg, "points of damage.")
+
+        # Spells
+        ene_magic = random.randint(0, 6)
+        if ene_magic > 4:
+            enemy_choice = 2
+            magic_choice = random.randint(0,2)
+            magic_dmg = enemy.generate_spell_damage(magic_choice)
+            spell = enemy.get_spell_name(magic_choice)
+            cost = enemy.get_spell_mp_cost(magic_choice)
+
+            # See if we have enough MP
+            current_mp = enemy.get_mp()
+            if cost > current_mp:
+                print(bcolors.FAIL + "\nEnemy does not have enough MP to cast Spell" + bcolors.ENDC)
+                pass
+
+            # If we have enough MP, see which status each spell could inflict
+            if magic_choice == 0:  # fire
+                print("Enemy casted Blaze and did", magic_dmg, "Damage!")
+                print("You took 20 Burn Damage")
+                player.take_damage(20)
+
+
+            elif magic_choice == 1: # paralyzed
+                print("Enemy casted Lightning and did", magic_dmg, "Damage!")
+
+
+            elif magic_choice == 2: # frozen
+                print("Enemy casted Frostbite and did", magic_dmg, "Damage!")
+                print("You took 10 Frozen Damage")
+                player.take_damage(10)
+
+
+            enemy.reduce_mp(cost)
+            player.take_damage(magic_dmg)
+
+        # Normal Attack
+        else:
+            enemy_choice = 1
+            enemy_dmg = enemy.generate_damage()
+            player.take_damage(enemy_dmg)
+            print("Enemy attacks for", enemy_dmg, "points of damage.")
 
     else:
         print("Enemy is Immobilized")
@@ -119,6 +160,10 @@ while running:
     # Makes this a little interesting...
     if (enemy.get_hp() < enemy.get_max_hp() / 6) and (status == "FROZEN"):
         enemy.enemy_heal()
+        enemy_current_mp = enemy.get_mp()
+        enemy.reduce_mp(10)
+        if enemy_current_mp < 0:
+            enemy_current_mp = 0
 
 
 
