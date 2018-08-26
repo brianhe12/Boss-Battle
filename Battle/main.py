@@ -2,13 +2,13 @@ from classes.game import Person, bcolors
 import random
 import time
 # Spells
-magic = [{"name": "Blaze", "cost": 10, "dmg": 120},
+magic = [{"name": "Blaze", "cost": 10, "dmg": 100},
         {"name": "Lightning", "cost": 15, "dmg": 100},
         {"name": "Blizzard", "cost": 8, "dmg": 70}]
 
 
 player = Person(430, 70, 60, 34, magic)
-enemy = Person(1300, 70, 45, 25, magic)
+enemy = Person(1325, 70, 45, 25, magic)
 
 #Status's
 status = "None"
@@ -52,7 +52,7 @@ while running:
 
         # If we have enough MP, see which status each spell could inflict
         if magic_choice == 0: #fire
-            burn_status_count = burn_status_count + 2
+            burn_status_count = burn_status_count + 3
             status = "BURNED"
 
         elif magic_choice == 1: #paralyzed
