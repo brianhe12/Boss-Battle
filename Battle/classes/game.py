@@ -39,7 +39,7 @@ class Person:
         self.hp -= dmg
         if self.hp <= 0:
             self.hp = 0
-            print(bcolors.FAIL + bcolors.BOLD + "Game Over. You have Died" + bcolors.ENDC)
+          # print(bcolors.FAIL + bcolors.BOLD + "Game Over. You have Died" + bcolors.ENDC)
         return self.hp
 
 # Get Functions
@@ -57,7 +57,7 @@ class Person:
 
     # Reduce MP when we use spells
     def reduce_mp(self, cost):
-        self.mp =- cost
+        self.mp = self.mp - cost
 
     def get_spell_name(self, i):
         return self.magic[i]["name"]
@@ -68,7 +68,7 @@ class Person:
     def choose_action(self):
         i = 1
         print("Choose your Action!")
-        time.sleep(0.5)
+      # time.sleep(0.5)
         for item in self.actions:
             print(str(i) + ":", item)
             i += 1
