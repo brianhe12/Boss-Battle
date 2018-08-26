@@ -22,7 +22,9 @@ class Person:
         self.atkh = atk + 10
         self.df = df
         self.magic = magic
-        self.actions = ["Attack", "Magic"]
+        self.actions = ["Attack", "Magic", "Heal"]
+
+
 
 # Will generate and return random damage between atkl and atkh
     def generate_damage(self):
@@ -68,7 +70,6 @@ class Person:
     def choose_action(self):
         i = 1
         print("Choose your Action!")
-      # time.sleep(0.5)
         for item in self.actions:
             print(str(i) + ":", item)
             i += 1
@@ -79,6 +80,17 @@ class Person:
         for spell in self.magic:
             print(str(i) + ":", spell["name"], "(cost:", str(spell["cost"]) + ")")
             i += 1
+    def heal(self):
+        health = random.randrange(-12,40)
+        mana = random.randrange(0,5)
+        self.hp = self.hp + health
+        self.mp = self.mp + mana
+        print("Healed:", health, "points and", mana, "Mana")
+
+    def enemy_heal(self):
+        health = random.randrange(45,60)
+        self.hp = self.hp + health
+        print("Enemy Regenerated:", health, "points")
 
 
 
