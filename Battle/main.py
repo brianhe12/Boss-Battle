@@ -1,6 +1,7 @@
 from classes.game import Person, bcolors
 import random
 import time
+
 # Spells
 magic = [{"name": "Blaze", "cost": 10, "dmg": 100},
         {"name": "Lightning", "cost": 15, "dmg": 100},
@@ -23,6 +24,7 @@ frozen_skip = False
 running = True
 print(bcolors.FAIL + bcolors.BOLD + "AN ENEMY ATTACKS!" + bcolors.ENDC)
 
+# Loop the Game until winner is decided
 while running:
     print("=======================")
     player.choose_action()
@@ -69,6 +71,7 @@ while running:
         player.reduce_mp(cost)
         enemy.take_damage(magic_dmg)
 
+# If Player chooses to Heal
     elif choice == 3:
         player.heal()
 
@@ -105,7 +108,7 @@ while running:
     else:
         print("Enemy is Immobilized")
 
-    # Status Effects
+# Status Effects
     if burn_status_count > 0:
         enemy.take_damage(20)
         print("Enemy took 20 Burn Damage!")
@@ -117,9 +120,9 @@ while running:
     if (enemy.get_hp() < enemy.get_max_hp() / 6) and (status == "FROZEN"):
         enemy.enemy_heal()
 
-    # Battle Stats
 
-    # Enemy Stats
+
+# Enemy Stats
     enemy_current_hp = enemy.get_hp()
     enemy_max_hp = enemy.get_max_hp()
     enemy_current_mp = enemy.get_mp()
@@ -127,7 +130,7 @@ while running:
     print("Enemy HP:",bcolors.FAIL, enemy_current_hp, "/", enemy_max_hp, bcolors.ENDC, "Enemy MP:", bcolors.OKBLUE, enemy_current_mp, "/", enemy_max_mp, bcolors.ENDC)
 
 
-    # Player Stats
+# Player Stats
     current_mp = player.get_mp()
     max_mp = player.get_max_mp()
     current_hp = player.get_hp()
@@ -139,7 +142,7 @@ while running:
     elif (current_hp > (max_hp/5) and (current_hp != 0)):
         print("Your HP:", bcolors.OKGREEN, current_hp, "/", max_hp, bcolors.ENDC, "Your MP:", bcolors.OKBLUE, current_mp, "/", max_mp, bcolors.ENDC)
 
-    #End of Game
+#End of Game
     if ((player.get_hp() == 0) or ((enemy_current_hp == 0) and (current_hp == 0))):
         print("Your HP:", bcolors.BOLD + bcolors.FAIL, current_hp, bcolors.ENDC, "/", max_hp, "Your MP:", bcolors.OKBLUE, current_mp, "/", max_mp, bcolors.ENDC)
 
