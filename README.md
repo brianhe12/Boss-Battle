@@ -4,3 +4,6 @@ Make sure to have [Python](https://www.python.org/) installed. Download the enti
 
 **NOTE:** Don't run this program with the Windows Command Prompt. It will still work but the colors don't show up correctly.
 
+##To Win
+Your only goal is to reduce your enemies HP to 0. If your HP reaches zero, you lose. If both you and your enemies HP both reach zero on the same turn, you still lose. Good luck.
+
