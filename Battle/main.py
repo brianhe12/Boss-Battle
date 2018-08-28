@@ -200,7 +200,7 @@ while running:
         running = False
 
     elif enemy.get_hp() == 0:
-        print(bcolors.BOLD + bcolors.UNDERLINE + bcolors.HEADER + "You win!" + bcolors.ENDC)
+        print(bcolors.BOLD + bcolors.HEADER + "You win!" + bcolors.ENDC)
         running = False
 
 
