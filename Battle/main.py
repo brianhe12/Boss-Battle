@@ -187,7 +187,7 @@ while running:
     max_hp = player.get_max_hp()
 
     if (current_hp < (max_hp/5)) and (current_hp != 0):
-        print("Your HP:", bcolors.BOLD + bcolors.FAIL, current_hp, "/", bcolors.ENDC, bcolors.OKGREEN, max_hp, bcolors.ENDC, bcolors.OKBLUE, "Your MP:", current_mp, "/", max_mp, bcolors.ENDC)
+        print("Your HP:", bcolors.BOLD + bcolors.FAIL, current_hp, "/", bcolors.ENDC, bcolors.OKGREEN, max_hp, bcolors.ENDC, "Your MP:",  bcolors.OKBLUE, current_mp, "/", max_mp, bcolors.ENDC)
         print(bcolors.HEADER + bcolors.BOLD + bcolors.FAIL, "CRITICAL!!!", bcolors.ENDC)
     elif (current_hp > (max_hp/5) and (current_hp != 0)):
         print("Your HP:", bcolors.OKGREEN, current_hp, "/", max_hp, bcolors.ENDC, "Your MP:", bcolors.OKBLUE, current_mp, "/", max_mp, bcolors.ENDC)
@@ -200,7 +200,7 @@ while running:
         running = False
 
     elif enemy.get_hp() == 0:
-        print(bcolors.OKGREEN + "You win!" + bcolors.ENDC)
+        print(bcolors.BOLD + bcolors.UNDERLINE + bcolors.HEADER + "You win!" + bcolors.ENDC)
         running = False
 
 
