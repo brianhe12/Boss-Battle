@@ -8,5 +8,5 @@ Make sure to have [Python](https://www.python.org/) installed. Download the enti
 
 
 ## To Win the Game
-Your only goal is to reduce your enemies HP to 0. If your HP reaches 0, you lose. If both you and your enemies HP both reach 0 on the same turn, you still lose. There are certain mechanics in the game that I'll let you figure out. Good luck.
+Your only goal is to reduce your enemies HP to 0. If your HP reaches 0, you lose. If both you and your enemies HP both reach 0 on the same turn, you still lose. There are certain mechanics in the game that I'll let you figure out on your own. Good luck.
 
