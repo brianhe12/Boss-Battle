@@ -38,7 +38,7 @@ while running:
     if choice == 1:
         dmg = player.generate_damage()
         enemy.take_damage(dmg)
-        print("You attacked for", dmg, "points of damage.")
+        print("You attacked for", dmg, "points of Damage!")
 
 # If Player chooses to use Magic
     elif choice == 2:
@@ -97,7 +97,7 @@ while running:
     elif (status == "FROZEN") and (frozen_status_count > 0):
         frozen_skip = True
         #print("Enemy Frozen")
-        print("Enemy took 10 Frozen Damage")
+        print("Enemy took 10 Frozen Damage!")
         enemy.take_damage(10)
         frozen_status_count = frozen_status_count - 1
 
@@ -116,7 +116,7 @@ while running:
             # See if we have enough MP
             current_mp = enemy.get_mp()
             if cost > current_mp:
-                print(bcolors.FAIL + "Enemy tries to cast spell but Fails!" + bcolors.ENDC)
+                print(bcolors.FAIL + "Enemy tries to cast spell, but Failed!" + bcolors.ENDC)
                 enemy_dmg = enemy.generate_damage()
                 player.take_damage(enemy_dmg)
                 print("Enemy attacks for", enemy_dmg, "points of damage.")
@@ -147,7 +147,7 @@ while running:
             enemy_choice = 1
             enemy_dmg = enemy.generate_damage()
             player.take_damage(enemy_dmg)
-            print("Enemy attacks for", enemy_dmg, "points of damage.")
+            print("Enemy attacks for", enemy_dmg, "points of Damage!")
 
     else:
         print("Enemy is Immobilized")
@@ -188,7 +188,7 @@ while running:
 
     if (current_hp < (max_hp/5)) and (current_hp != 0):
         print("Your HP:", bcolors.BOLD + bcolors.FAIL, current_hp, "/", bcolors.ENDC, bcolors.OKGREEN, max_hp, bcolors.ENDC, "Your MP:",  bcolors.OKBLUE, current_mp, "/", max_mp, bcolors.ENDC)
-        print(bcolors.HEADER + bcolors.BOLD + bcolors.FAIL, "CRITICAL!!!", bcolors.ENDC)
+        print(bcolors.HEADER + bcolors.BOLD + bcolors.FAIL, "Warning! Low HP", bcolors.ENDC)
     elif (current_hp > (max_hp/5) and (current_hp != 0)):
         print("Your HP:", bcolors.OKGREEN, current_hp, "/", max_hp, bcolors.ENDC, "Your MP:", bcolors.OKBLUE, current_mp, "/", max_mp, bcolors.ENDC)
 
@@ -196,7 +196,7 @@ while running:
     if ((player.get_hp() == 0) or ((enemy_current_hp == 0) and (current_hp == 0))):
         print("Your HP:", bcolors.BOLD + bcolors.FAIL, current_hp, bcolors.ENDC, "/", max_hp, "Your MP:", bcolors.OKBLUE, current_mp, "/", max_mp, bcolors.ENDC)
 
-        print(bcolors.FAIL + bcolors.BOLD + "Your enemy has defeated you!" + bcolors.ENDC)
+        print(bcolors.FAIL + bcolors.BOLD + "Your enemy has defeated you. You lose!" + bcolors.ENDC)
         running = False
 
     elif enemy.get_hp() == 0:
