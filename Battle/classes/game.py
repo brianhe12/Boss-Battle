@@ -81,16 +81,19 @@ class Person:
             print(str(i) + ":", spell["name"], "(cost:", str(spell["cost"]) + ")")
             i += 1
     def heal(self):
-        health = random.randrange(13,40)
+        if self.hp < self.maxhp/5:
+            health = random.randrange(30,40)
+        else:
+            health = random.randrange(13,40)
         mana = random.randrange(4,8)
         self.hp = self.hp + health
         self.mp = self.mp + mana
-        print("Healed:", health, "points and", mana, "Mana")
+        print(bcolors.OKGREEN, "Healed:", bcolors.ENDC, health, "points and", mana, "Mana")
 
     def enemy_heal(self):
-        health = random.randrange(45,60)
+        health = random.randrange(60,75)
         self.hp = self.hp + health
-        print("Enemy Regenerated:", health, "points")
+        print(bcolors.BOLD, bcolors.WARNING, "Enemy Regenerated",health,"HP points",bcolors.ENDC)
 
 
 

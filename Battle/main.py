@@ -164,7 +164,7 @@ while running:
     if (enemy.get_hp() < enemy.get_max_hp() / 6) and (status == "FROZEN"):
         enemy.enemy_heal()
         enemy_current_mp = enemy.get_mp()
-        if enemy_current_mp < 0:
+        if enemy_current_mp < 10:
             enemy_current_mp = 0
         else:
             enemy.reduce_mp(10)
