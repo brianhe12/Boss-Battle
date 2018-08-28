@@ -3,12 +3,12 @@ import random
 import time
 
 # Spells
-magic = [{"name": "Blaze", "cost": 10, "dmg": 100},
-        {"name": "Lightning", "cost": 15, "dmg": 100},
+magic = [{"name": "Blaze", "cost": 12, "dmg": 100},
+        {"name": "Lightning", "cost": 15, "dmg": 150},
         {"name": "Frostbite", "cost": 8, "dmg": 70}]
 
 
-player = Person(430, 70, 60, 34, magic)
+player = Person(450, 50, 60, 34, magic)
 enemy = Person(1325, 70, 45, 25, magic)
 
 
@@ -56,7 +56,7 @@ while running:
 
         # If we have enough MP, see which status each spell could inflict
         if magic_choice == 0: #fire
-            burn_status_count = burn_status_count + 3
+            burn_status_count = burn_status_count + 2
             print("Blaze did", magic_dmg, "Damage!")
             status = "BURNED"
 
@@ -116,28 +116,31 @@ while running:
             # See if we have enough MP
             current_mp = enemy.get_mp()
             if cost > current_mp:
-                print(bcolors.FAIL + "\nEnemy does not have enough MP to cast Spell" + bcolors.ENDC)
+                print(bcolors.FAIL + "Enemy tries to cast spell but Fails!" + bcolors.ENDC)
+                enemy_dmg = enemy.generate_damage()
+                player.take_damage(enemy_dmg)
+                print("Enemy attacks for", enemy_dmg, "points of damage.")
                 pass
-
-            # If we have enough MP, see which status each spell could inflict
-            if magic_choice == 0:  # fire
-                print("Enemy casted Blaze and did", magic_dmg, "Damage!")
-                print("You took 20 Burn Damage")
-                player.take_damage(20)
-
-
-            elif magic_choice == 1: # paralyzed
-                print("Enemy casted Lightning and did", magic_dmg, "Damage!")
+            else:
+                # If we have enough MP, see which status each spell could inflict
+                if magic_choice == 0:  # fire
+                    print("Enemy casted Blaze and did", magic_dmg, "Damage!")
+                    print("You took 15 Burn Damage")
+                    player.take_damage(15)
 
 
-            elif magic_choice == 2: # frozen
-                print("Enemy casted Frostbite and did", magic_dmg, "Damage!")
-                print("You took 10 Frozen Damage")
-                player.take_damage(10)
+                elif magic_choice == 1: # paralyzed
+                    print("Enemy casted Lightning and did", magic_dmg, "Damage!")
 
 
-            enemy.reduce_mp(cost)
-            player.take_damage(magic_dmg)
+                elif magic_choice == 2: # frozen
+                    print("Enemy casted Frostbite and did", magic_dmg, "Damage!")
+                    print("You took 10 Frozen Damage")
+                    player.take_damage(10)
+
+
+                enemy.reduce_mp(cost)
+                player.take_damage(magic_dmg)
 
         # Normal Attack
         else:
@@ -161,9 +164,11 @@ while running:
     if (enemy.get_hp() < enemy.get_max_hp() / 6) and (status == "FROZEN"):
         enemy.enemy_heal()
         enemy_current_mp = enemy.get_mp()
-        enemy.reduce_mp(10)
         if enemy_current_mp < 0:
             enemy_current_mp = 0
+        else:
+            enemy.reduce_mp(10)
+
 
 
 
